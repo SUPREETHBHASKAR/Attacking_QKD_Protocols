@@ -7,16 +7,16 @@
 
 ### Important Files
 &emsp; We have five important files:
-1. [**"quantumMedium.py":**](./quantumMedium.py) This is the quantum medium through which the 3 three parties (Alice, Bob and Eve) will communicate with each other.
-2. [**"classicalMedium.py":**](./classicalMedium.py) This is the classical medium through which the 3 three parties (alice, bob and eve) will communicate with each other after they have communicated the qubit away.
-3. [**"alice.py":**](./alice.py) This is Alice. She will use this code to carry out the communication throught the two above mentioned mediums.
-4. [**"bob.py":**](./bob.py) Similarly this is the code for Bob.
-5. [**"eve.py":**](./eve.py) Similarly this is the code for Eve.
+1. [**"quantumMedium.py":**](/quantumMedium.py) This is the quantum medium through which the 3 three parties (Alice, Bob and Eve) will communicate with each other.
+2. [**"classicalMedium.py":**](/classicalMedium.py) This is the classical medium through which the 3 three parties (alice, bob and eve) will communicate with each other after they have communicated the qubit away.
+3. [**"alice.py":**](/alice.py) This is Alice. She will use this code to carry out the communication throught the two above mentioned mediums.
+4. [**"bob.py":**](/bob.py) Similarly this is the code for Bob.
+5. [**"eve.py":**](/eve.py) Similarly this is the code for Eve.
 
 ### Not-so-Important Files
 &emsp; We have two more Not-so-Important files.
-1. [**"README.md":**](./README.md) It is this file!
-2. [**"tries.ipynb":**](./tries.ipynb) I used this jupyter notebook to write all the trash codes to try out things.
+1. [**"README.md":**](/README.md) It is this file!
+2. [**"tries.ipynb":**](/tries.ipynb) I used this jupyter notebook to write all the trash codes to try out things.
 
 
 ## Plan:

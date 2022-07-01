@@ -1,11 +1,9 @@
 from flask import Flask, request
-from random import choice as IDK
 from qiskit import *
+from time import sleep
 
-app = Flask(__name__)
-
-
-
+key_length = 1000
+qubits = []
 
 def prepare(instruction):
     a = int(instruction[0])  # X or not
@@ -34,21 +32,38 @@ def measure(qc, basis):
 
 
 
+app = Flask(__name__)
 
-@app.route("/send", methods=["POST"])
-def alice():
+@app.route("/sendqubit", methods=["POST"])
+def sendqubit():
     """
     Alice will send a dictionary of the form:
     qubit = {"qubit": "10"}  # 00, 01, 10 or 11
     First bit is X or not, second bit is H or not
 
-    this function will store them in a list (list of dictionaries)
+    this function will generate quantum circuits from then and store them in a list
     """
-    # ret = f"Request from Alice: {dict(request.form)}"
-    qc = prepare(dict(request.form)["qubit"])
-    result = measure(qc, "*")
-    print(f"\n{result}\n")
-    return "Thanks!"
+    name = request.form["name"]
+    if name == "alice":
+        if len(qubits) == key_length:
+            return "Key is full!"
+        # ret = f"Request from Alice: {request.form}"
+        qc = prepare(request.form["qubit"])
+        qubits.append(qc)
+        return "Qubit Added"
+    else:
+        return f"{name.title()} is not authorised to send qubits!"
+
+@app.route("/getqubit", methods=["POST"])
+def getqubit():
+    qubitn = int(request.form["qubitn"])
+    if qubitn >= key_length:
+        return "over"
+    elif qubitn < len(qubits):
+        return "wait a bit"
+    basis = request.form["basis"]
+    return measure(qubits[qubitn], basis)
+    
 
 
 # something here
