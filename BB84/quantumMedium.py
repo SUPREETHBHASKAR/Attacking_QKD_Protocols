@@ -2,7 +2,7 @@ from flask import Flask, request
 from qiskit import *
 from time import sleep
 
-key_length = 1000
+key_length = 5
 qubits = []
 
 def prepare(instruction):
@@ -28,9 +28,6 @@ def measure(qc, basis):
     comp = Aer.get_backend("qasm_simulator")
     results = list(execute(qc, comp, shots = 1).result().get_counts().keys())[0]
     return results
-
-
-
 
 app = Flask(__name__)
 
@@ -58,10 +55,14 @@ def sendqubit():
 def getqubit():
     qubitn = int(request.form["qubitn"])
     if qubitn >= key_length:
+        print(len(qubits))
         return "over"
-    elif qubitn < len(qubits):
+    elif qubitn > len(qubits):
+        print(qubitn, len(qubits))
         return "wait a bit"
     basis = request.form["basis"]
+    print("basis:", basis)
+    print("qubitn:", qubitn)
     return measure(qubits[qubitn], basis)
     
 
