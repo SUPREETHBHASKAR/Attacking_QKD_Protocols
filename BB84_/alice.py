@@ -34,10 +34,10 @@ def get_bob_bases(bases):
     try:
         ret = requests.post(f"{classicalMedium}get_bob_bases", data = {"bases": bases}).text
     except:
-        sleep(5)
+        sleep(key_length/120)
         return get_bob_bases(bases)
     if  ret == "wait":
-        sleep(5)
+        sleep(key_length/120)
         return get_bob_bases(bases)
     return ret
 
@@ -45,7 +45,7 @@ def send_sample(usable_bits, n = 0.3):
     sample_indices = sorted(
         take_any(usable_bits, int((key_length/2)*n))
     )
-    # print(len(sample_indices))
+    print("sample length =", len(sample_indices))
     sampleD = {x: bits[x] for x in sample_indices}
     
     # Encoding it before sending
@@ -65,6 +65,19 @@ def compile_key(bits, sample, usable_bits):
         ret += bits[i]
     return ret
 
+def successful():
+    try:
+        ret = requests.get(f"{classicalMedium}status").text
+    except:
+        sleep(5)
+        return successful()
+    if  ret == "wait":
+        sleep(5)
+        return successful()
+    if ret == "success":
+        return True
+    return False
+
 key_length = int(requests.get(quantumMedium).text)
 
 bits, alice_bases = sendQubit(key_length)
@@ -79,5 +92,8 @@ usable_bits = [i for i in range(key_length) if bob_bases[i] == alice_bases[i]]
 
 sample = send_sample(usable_bits, n = 0.3)
 
-key = compile_key(bits, sample, usable_bits)
-print(f"key = {key}")
+if successful():
+    key = compile_key(bits, sample, usable_bits)
+    print(f"key = {key}")
+else:
+    print("Eve Detected, mission abort!")

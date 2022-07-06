@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 bob_bases, alice_bases = None, None
 sample = None
+status = None
 
 
 @app.route('/get_bob_bases', methods=['POST'])
@@ -37,9 +38,17 @@ def get_sample():
         return sample
     return "wait"
 
-
-
-
+@app.route("/status", methods=["GET", "POST"])
+def get_status():
+    global status
+    if request.method == "GET":
+        if status != None:
+            return status
+        return "wait"
+    else:
+        status = request.form["status"]
+        return "done"
+        
 
 app.run(
     # host = "192.168.0.100",

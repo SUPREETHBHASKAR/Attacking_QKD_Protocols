@@ -80,8 +80,11 @@ check = [sample[i] == int(bits[i]) for i in sample.keys()]
 print(f"match = {sum(check)/len(check)*100}%")
 
 if sum(check)/len(check)>=(0.9-0.05):
+    requests.post(f"{classicalMedium}status", data = {"status": "success"})
     print("Success")
     key = compile_key(bits, sample, usable_bits)
+    print(f"key length = {len(key)}")
     print(f"key = {key}")
 else:
+    requests.post(f"{classicalMedium}status", data = {"status": "abort"})
     print("Eve Detected, mission abort!")

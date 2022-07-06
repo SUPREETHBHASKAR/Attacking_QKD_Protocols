@@ -5,7 +5,7 @@ from random import random
 from tqdm import tqdm
 # from time import sleep
 
-key_length = 1000
+key_length = 2500
 qubits = None
 comp = Aer.get_backend("qasm_simulator")
 
@@ -28,7 +28,7 @@ def measure1(qc, basis):
         raise ValueError('"basis" must be "+" or "*"!')
     qc.measure(0, 0)
     results = list(execute(qc, comp, shots = 1).result().get_counts().keys())[0]
-    # if random() > 0.9: results = str(1-int(results))  # adding errors
+    if random() > 0.85: results = str(1-int(results))  # adding errors
     return results
 
 def measure(qubits, mbasis):
