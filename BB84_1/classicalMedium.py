@@ -1,7 +1,5 @@
 from flask import Flask, request
 
-users = {}
-
 app = Flask(__name__)
 
 
