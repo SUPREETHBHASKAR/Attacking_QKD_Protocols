@@ -45,7 +45,7 @@
 
 ### Explanation for the Code
 
-![BB84 Protocol Schematic](ref/Flow_Chart.png)
+![BB84 Protocol Schematic](/ref/Flow_Chart.png)
 
  1. Alice asks Quantum Medium to get the length of the Key to be sent.
  2. Alice sends that many number of qubits to the quantum medium.
