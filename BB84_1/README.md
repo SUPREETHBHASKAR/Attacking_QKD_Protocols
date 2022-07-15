@@ -43,7 +43,7 @@
 
  \* **100%:** This value is theoretically 100%, but practically this value goes down by some percentages due to errors in quantum systems.
 
-### Explanation for the Code
+## Explanation for the Code
 
 ![BB84 Protocol Schematic](./references/Flow_Chart.png)
 
