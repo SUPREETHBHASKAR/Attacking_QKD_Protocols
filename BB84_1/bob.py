@@ -45,7 +45,6 @@ def get_sample():
     return ret
 
 def process_sample(sample):
-    # 0:0-7:0-9:1-14:1-21:1-33:1-35:0-41:0-44:1-56:0-65:0-69:1-74:0-79:1-112:0-115:1-124:1-126:1-129:0-141:1-147:0-155:1-158:1-166:1-167:0-182:0-186:1-190:1-192:0-199:1
     ss = sample.split("-")
     ret = {}
     for s in ss:
@@ -66,14 +65,10 @@ bits, bob_bases = readQubit()
 
 alice_bases = get_alice_bases(bob_bases)
 
-# print(f"len(alice_bases) = {len(alice_bases)}")
 
 usable_bits = [i for i in range(key_length) if bob_bases[i] == alice_bases[i]]
 
 sample = process_sample(get_sample())
-
-# print(sample)
-# print(bits)
 
 check = [sample[i] == int(bits[i]) for i in sample.keys()]
 

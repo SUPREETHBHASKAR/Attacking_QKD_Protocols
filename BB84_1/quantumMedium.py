@@ -1,15 +1,13 @@
 from flask import Flask, request
 from qiskit import *
-# from random import choice as IDK
-from random import random
 from tqdm import tqdm
-# from time import sleep
 
 key_length = 2500
 qubits = None
 comp = Aer.get_backend("qasm_simulator")
 
 def prepare(inp):
+    """Prepares the qubits and returns a list of key_length quantum circuits."""
     bits = inp["bits"]
     bases = inp["bases"]
     message = []
@@ -22,6 +20,7 @@ def prepare(inp):
     return message
 
 def measure1(qc, basis):
+    """Measures the supplied qubit in the desired basis and returns the result."""
     if basis == "*":
         qc.h(0)
     elif basis != "+":
@@ -32,6 +31,7 @@ def measure1(qc, basis):
     return results
 
 def measure(qubits, mbasis):
+    """takes all the qubits and all the bases and returns a string containing measurements."""
     if len(qubits) != len(mbasis):
         raise ValueError(f"length of qubits (= {len(qubits)}) and length of mbasis (= {len(mbasis)}) aren't equal")
     ret = ""
@@ -45,21 +45,24 @@ app = Flask(__name__)
 
 @app.route("/")
 def login():
+    """Anyone can know the key-length by puttig a request to this endpoint."""
     return str(key_length)
 
 @app.route("/send_qubit", methods=["POST"])
 def sendqubit():
     """
     Alice will send a dictionary of the form:
-    qubit = {"qubit": "10"}  # 00, 01, 10 or 11
-    First bit is X or not, second bit is H or not
+    data = {
+            "bits": bits,  # key_length long string of 0s and 1s
+            "bases": bases,  # key_length long string of + and *
+            "name": name  # here name = "Alice"
+            }
 
     this function will generate quantum circuits from then and store them in a list
     """
     global qubits
     name = request.form["name"]
     if name == "alice":
-        # ret = f"Request from Alice: {request.form}"
         qubits = prepare(request.form)
         return "Qubit Added"
     else:
@@ -67,20 +70,15 @@ def sendqubit():
 
 @app.route("/read_qubits", methods=["POST"])
 def getqubit():
+    """anyone can send a request along with a choice of bases at this
+    endpoint to get the qubits read in that base."""
     if not qubits:
         return "Wait"
     bases = request.form["basis"]
-    # print("basis:", basis)
     return measure(qubits, bases)
-    
-
-
-# something here
-
 
 app.run(
-    # host = "192.168.0.100",
-    host = "localhost",
+    host = "localhost",  # change this to your local ip
 	port = 5050,
 	debug = True,
  )

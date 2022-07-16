@@ -5,7 +5,6 @@ app = Flask(__name__)
 bob_bases, alice_bases = None, None
 status = None
 
-
 @app.route('/get_bob_bases', methods=['POST'])
 def get_bob_bases():
     global alice_bases
@@ -24,13 +23,8 @@ def get_alice_bases():
         return alice_bases
     return "wait"
 
-
-
-
-
 app.run(
-    # host = "192.168.0.100",
-    host = "localhost",
+    host = "10.1.55.133",
     port = 5000,
     debug = True,
  )

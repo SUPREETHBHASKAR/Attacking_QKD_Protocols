@@ -12,6 +12,9 @@ quantumMedium  =  f"http://{qIP}:{qPORT}/"  # URL of quantum channel
 classicalMedium = f"http://{cIP}:{cPORT}/"  # URL of classical channel
 
 def prepare(key_length):
+    """prepares key_length number of random choices for qubits
+    to be prepared in. a denotes the values of the qubits and b
+    denotes the corresponding bases to be used to encode the qubit"""
     a = ""  # X or not
     b = ""  # H or not
     for i in range(key_length):
@@ -20,6 +23,7 @@ def prepare(key_length):
     return a, b
 
 def sendQubit(key_length):
+    """gets the qubit preparation choices and sends them to quantum channel"""
     bits, bases = prepare(key_length)
     requests.post(f"{quantumMedium}send_qubit",
                   data = {
@@ -42,6 +46,7 @@ def get_bob_bases(bases):
     return ret
 
 def send_sample(usable_bits, n = 0.3):
+    """prepares and sends a sample of the qubits to quantum channel"""
     sample_indices = sorted(
         take_any(usable_bits, int((key_length/2)*n))
     )
@@ -59,6 +64,7 @@ def send_sample(usable_bits, n = 0.3):
     return sampleD
 
 def compile_key(bits, sample, usable_bits):
+    """compiles the key from the usable bits and discarding the sample"""
     use = [i for i in range(key_length) if i in usable_bits and i not in sample.keys()]
     ret = ""
     for i in use:
@@ -78,20 +84,26 @@ def successful():
         return True
     return False
 
+
+
+# Know the key length
 key_length = int(requests.get(quantumMedium).text)
 
+# Send those many qubit preparation choices to quantum channel.
+# Quantum channel will prepare them as requested
 bits, alice_bases = sendQubit(key_length)
 
+# Get the bases of Bob
 bob_bases = get_bob_bases(alice_bases)
 
-# print(f"len(bob_bases) = {len(bob_bases)}")
-
+# know which qubits have been read by Bob in the correct basis
+# to calculate which qubits are usable and which aren't
 usable_bits = [i for i in range(key_length) if bob_bases[i] == alice_bases[i]]
 
-# print(sum(usable_bits))
-
+# Send a sample of the usable qubits to quantum channel
 sample = send_sample(usable_bits, n = 0.3)
 
+# If successful, compile the key, else abort the mission
 if successful():
     key = compile_key(bits, sample, usable_bits)
     print(f"key = {key}")
