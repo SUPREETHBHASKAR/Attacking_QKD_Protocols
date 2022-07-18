@@ -2,7 +2,7 @@ import random
 import requests
 from time import sleep
 
-qIP, qPORT = "localhost", "5050"
+qIP, qPORT = "localhost", "5001"
 cIP, cPORT = "localhost", "5000"
 quantuMedium  =  f"http://{qIP}:{qPORT}/"  # URL of quantum channel
 classicalMedium = f"http://{cIP}:{cPORT}/"  # URL of classical channel
