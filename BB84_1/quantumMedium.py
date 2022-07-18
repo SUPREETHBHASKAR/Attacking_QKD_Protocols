@@ -45,7 +45,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def login():
-    """Anyone can know the key-length by puttig a request to this endpoint."""
+    """Anyone can know the key-length by raising a request to this endpoint."""
+    print(f"someone asks for the key-length, Quantum Medium return {key_length}")    
     return str(key_length)
 
 @app.route("/send_qubit", methods=["POST"])
@@ -63,6 +64,7 @@ def sendqubit():
     global qubits
     name = request.form["name"]
     if name == "alice":
+        print(f"\nAlice sends all the {key_length} qubit")
         qubits = prepare(request.form)
         return "Qubit Added"
     else:
@@ -73,7 +75,9 @@ def getqubit():
     """anyone can send a request along with a choice of bases at this
     endpoint to get the qubits read in that base."""
     if not qubits:
+        print("\nSomeone sends bases and tries to measure the qubits. But Alice hasn't sent the Qubits yet! So he waits!")
         return "Wait"
+    print("\nSomeone measures the qubits in his/her choice of bases.")
     bases = request.form["basis"]
     return measure(qubits, bases)
 

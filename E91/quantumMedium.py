@@ -1,7 +1,5 @@
 from flask import Flask, request
 from qiskit import *
-from tqdm import tqdm
-from time import time
 
 singlets_sent = 2000
 qcomp = Aer.get_backend("qasm_simulator")
@@ -47,17 +45,13 @@ def calc():
     alice_bases = bases["alice"]
     bob_bases = bases["bob"]
     eve_bases = bases["eve"]
-    for i in tqdm(range(singlets_sent)):
+    for i in range(singlets_sent):
         singlet = QuantumCircuit(2, 4)
         singlet.x(0)
         singlet.x(1)
         singlet.h(0)
         singlet.cx(0, 1)
         if eve_bases:
-            # We are just adding the measurement of eve's qubit,
-            # we won't make eve actually read them ever...
-            # We only want eve to indulge...
-            # in real scenario, eve will read them, but here she isn't
             alice_measure(singlet, eve_bases[i])
             # bob_measure(singlet, eve_bases[i])
         alice_measure(singlet, alice_bases[i])
@@ -65,9 +59,7 @@ def calc():
         singlet.measure(0, 0)
         singlet.measure(1, 1)
         singlets.append(singlet)
-    t0 = time()
     result = execute(singlets, qcomp, shots=1).result().get_counts()
-    print(f"\ntook {time()-t0} seconds\n")
     chsh_res = result
     result = [list(x.keys())[0] for x in result]
     alice_result = "".join([x[-1] for x in result])
@@ -78,6 +70,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def login():
+    print(f"\nsomeone asked for the number of singlets... returned {singlets_sent}")
     return str(singlets_sent)
 
 @app.route("/send_bases", methods=["POST"])
@@ -85,16 +78,22 @@ def send_bases():
     global bases
     name = request.form["name"]
     bases[name] = request.form["bases"]
+    print(f"\n{name.title()} sent his/her bases")
     if bases["bob"] and bases["alice"]:
+        print("\nAs the Quantum Medium has both the bases of Alice and Bob, it can start making measurements...")
         calc()
+        print("\nmeasurements completed!")
     return "Ok"
 
-@app.route("/read_qubits", methods=["POST"])
-def read_qubits():
+@app.route("/measure_qubits", methods=["POST"])
+def measure_qubits():
     name = request.form["name"]
+    print(f"\n{name.title()} is requesting for his/her measurements.", end = " ")
     if results:
+        print("Measurements are now ready, so we are returning the results.")
         return results[name]
     else:
+        print("But measurements are not ready yet, so we request him/her to wait a bit before asking again!")
         return "wait"
 
 app.run(

@@ -19,16 +19,16 @@ def send_bases(baseOpt, singlets_sent, name):
                   ).text
     return choice
 
-def read_qubits(name):
+def measure_qubits(name):
     try:
         print("Reading qubits...")
-        ret = requests.post(f"{quantuMedium}read_qubits", data={"name":name}).text
+        ret = requests.post(f"{quantuMedium}measure_qubits", data={"name":name}).text
     except:
         sleep(10)
-        return read_qubits(name)
+        return measure_qubits(name)
     if  ret == "wait":
         sleep(10)
-        return read_qubits(name)
+        return measure_qubits(name)
     return ret
 
 def get_bob_bases(bases):

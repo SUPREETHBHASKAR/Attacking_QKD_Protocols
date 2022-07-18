@@ -6,7 +6,7 @@ baseOpt = ['X', 'W', 'Z']
 
 singlets_sent = int(requests.get(quantuMedium).text)
 alice_bases = send_bases(baseOpt, singlets_sent, name)
-bits = read_qubits(name)
+bits = measure_qubits(name)
 bob_bases = get_bob_bases("".join(alice_bases))
 
 
