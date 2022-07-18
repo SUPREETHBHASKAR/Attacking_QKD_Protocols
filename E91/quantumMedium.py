@@ -1,8 +1,9 @@
 from flask import Flask, request
 from qiskit import *
 from tqdm import tqdm
+from time import time
 
-singlets_sent = 1000
+singlets_sent = 2000
 qcomp = Aer.get_backend("qasm_simulator")
 bases = {"alice": None, "bob": None, "eve": None}
 results = None
@@ -64,7 +65,9 @@ def calc():
         singlet.measure(0, 0)
         singlet.measure(1, 1)
         singlets.append(singlet)
+    t0 = time()
     result = execute(singlets, qcomp, shots=1).result().get_counts()
+    print(f"\ntook {time()-t0} seconds\n")
     chsh_res = result
     result = [list(x.keys())[0] for x in result]
     alice_result = "".join([x[-1] for x in result])
@@ -103,6 +106,7 @@ def chsh():
     if not chsh_res:
         return "wait"
     # lists with the counts of measurement results
+    print(f"\n\nchsh_res = {chsh_res}\n\n")
     search = ["00", "01", "10", "11"]
     XW = [0, 0, 0, 0]
     XV = [0, 0, 0, 0]
@@ -142,7 +146,7 @@ def chsh():
     return str(round(chsh_corr_val, 3))
 
 app.run(
-    host="10.1.55.133",
+    host="localhost",
     port=5050,
     debug=True,
  )
