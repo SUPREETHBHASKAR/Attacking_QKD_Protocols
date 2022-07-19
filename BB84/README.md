@@ -64,7 +64,7 @@
 
 # Code Results
 
-## When Eve does not interfere:
+## When Eve does not intercept:
 
 **"quantumMedium.py":** 
 

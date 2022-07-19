@@ -1,7 +1,7 @@
 from flask import Flask, request
 from qiskit import *
 
-singlets_sent = 2000
+number_of_singlets = 500
 qcomp = Aer.get_backend("qasm_simulator")
 bases = {"alice": None, "bob": None, "eve": None}
 results = None
@@ -45,7 +45,7 @@ def calc():
     alice_bases = bases["alice"]
     bob_bases = bases["bob"]
     eve_bases = bases["eve"]
-    for i in range(singlets_sent):
+    for i in range(number_of_singlets):
         singlet = QuantumCircuit(2, 4)
         singlet.x(0)
         singlet.x(1)
@@ -70,8 +70,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def login():
-    print(f"\nsomeone asked for the number of singlets... returned {singlets_sent}")
-    return str(singlets_sent)
+    print(f"\nsomeone asked for the number of singlets... returned {number_of_singlets}")
+    return str(number_of_singlets)
 
 @app.route("/send_bases", methods=["POST"])
 def send_bases():

@@ -4,14 +4,14 @@ name = "alice"
 print(f"Hi! This is {name.title()}!")
 baseOpt = ['X', 'W', 'Z']
 
-singlets_sent = int(requests.get(quantuMedium).text)
-alice_bases = send_bases(baseOpt, singlets_sent, name)
+number_of_singlets = int(requests.get(quantuMedium).text)
+alice_bases = send_bases(baseOpt, number_of_singlets, name)
 bits = measure_qubits(name)
 bob_bases = get_bob_bases("".join(alice_bases))
 
 key = ""
 uBitsA = ""
-for i in range(singlets_sent):
+for i in range(number_of_singlets):
     if alice_bases[i] == bob_bases[i]:
         bit = int(bits[i])
         if bit: key += "1"
@@ -21,7 +21,7 @@ for i in range(singlets_sent):
         uBitsA += bits[i]
         
 key_length = len(key)
-mismatch = singlets_sent - key_length
+mismatch = number_of_singlets - key_length
 
 uBitsB = get_bob_uBits(uBitsA)
 

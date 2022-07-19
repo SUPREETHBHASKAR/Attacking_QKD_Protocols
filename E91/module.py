@@ -8,8 +8,8 @@ quantuMedium  =  f"http://{qIP}:{qPORT}/"  # URL of quantum channel
 classicalMedium = f"http://{cIP}:{cPORT}/"  # URL of classical channel
 
 
-def send_bases(baseOpt, singlets_sent, name):
-    choice = "".join([baseOpt[random.randint(0, len(baseOpt)-1)] for i in range(singlets_sent)])
+def send_bases(baseOpt, number_of_singlets, name):
+    choice = "".join([baseOpt[random.randint(0, len(baseOpt)-1)] for i in range(number_of_singlets)])
     print("Sending bases...")
     requests.post(f"{quantuMedium}send_bases",
                   data = {

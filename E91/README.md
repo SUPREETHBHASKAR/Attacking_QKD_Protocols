@@ -17,13 +17,13 @@
 
 ![BB84 Protocol Schematic](./references/Flow_Chart.png)
 
-0. (Optional) Eve knows the key_length from Quantum Medium and sends his choice of bases.
-1. Alice and Bob get to know the key_length from Quantum Medium.
-2. Alice and Bob send their choice of bases to the Quantum Medium one by one. As soon as Quantum Medium has the choice of bases from Alice and Bob (whether or not Eve has sent her bases), Quantum Medium calculates the quantum circuits. If Eve has sent her choice of bases before this time, her measurements are done before that of Alice and Bob.
-3. Quantum Medium has measured the qubits according to everyone's choices of bases. Now Bob and Alice request it to get the values of the qubits which have been prepared by Quantum Medium already.
+0. (Optional) Eve gets to know the number_of_singlets from Quantum Medium. She then sends her choice of bases to Quantum Medium.
+1. Alice and Bob get to know the number_of_singlets from Quantum Medium.
+2. Alice and Bob send their choice of bases to the Quantum Medium one by one. As soon as Quantum Medium has the choice of bases from Alice and Bob (whether or not Eve has sent her bases), Quantum Medium measures the singlets. If Eve has sent her choice of bases before this time, her measurements are made before that of Alice and Bob.
+3. Quantum Medium has measured the qubits according to everyone's choices of bases. Now Bob and Alice request it to return the measurement outcomes.
 4. Alice and Bob share their choices of bases through the classical medium.
-5. Alice and Bob share their unused bits through the classical medium.
-6. Finally they individually calculate the CHSH scores and, depending on the score decide whether to use the established key or to start the process all over again.
+5. Alice and Bob share their unused bits through the classical medium for the calculation of CHSH test statistic.
+6. Finally they individually calculate the CHSH test statistic. Depending on the obtained value, they decide whether to use the established key or to start the process all over again.
 
 # Code Results
 
