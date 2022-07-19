@@ -9,7 +9,6 @@ bob_bases = send_bases(baseOpt, singlets_sent, name)
 bits = measure_qubits(name)
 alice_bases = get_alice_bases("".join(bob_bases))
 
-# =============================
 key = ""
 uBitsB = ""
 for i in range(singlets_sent):
@@ -20,21 +19,15 @@ for i in range(singlets_sent):
         uBitsB += " "
     else:
         uBitsB += bits[i]
-        # uBits[i] = {alice_bases[i]: int(bits[i])}
         
 key_length = len(key)
 mismatch = singlets_sent - key_length
-# =============================
-
 
 uBitsA = get_alice_uBits(uBitsB)
 
-print(f"uBitsA = {len(uBitsA)}")
-print(f"uBitsB = {len(uBitsB)}")
-
 chsh_score = chsh(uBitsA, uBitsB, alice_bases, bob_bases)
 print(f"chsh score: {chsh_score}")
-success = chsh_score < 0.3-2**1.5
+success = chsh_score < -2
 
 if success:
     print(key)

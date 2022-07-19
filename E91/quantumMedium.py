@@ -90,10 +90,10 @@ def measure_qubits():
     name = request.form["name"]
     print(f"\n{name.title()} is requesting for his/her measurements.", end = " ")
     if results:
-        print("Measurements are now ready, so we are returning the results.")
+        print("Measurements are now ready, so Quantum Medium is  returning the results.")
         return results[name]
     else:
-        print("But measurements are not ready yet, so we request him/her to wait a bit before asking again!")
+        print("But measurements are not ready yet, so Quantum Medium requests him/her to wait a bit before asking again!")
         return "wait"
 
 app.run(

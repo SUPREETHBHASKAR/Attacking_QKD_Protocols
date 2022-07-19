@@ -58,18 +58,18 @@ def get_sample():
 def get_status():
     """Bob after knowing Alice's sample, calculates the match factor.
     Depending upon the match factor he either decides to keep the key or not.
-    He declares his decission in the classical Medium.
-    Later Alice requests for the decission."""
+    He declares his decision in the classical Medium.
+    Later Alice requests for the decision."""
     global status
     if request.method == "GET":
-        print(f"\nAlice is requesting for Bob's decission on whether to proceed with the key or start the process of resending another key.")
+        print(f"\nAlice is requesting for Bob's decision on whether to proceed with the key or start the process of resending another key.")
         if status != None:
-            print("The Classical Medium already has Bob's decission, so it gives it to her.")
+            print("The Classical Medium already has Bob's decision, so it gives it to her.")
             return status
-        print("But Bob hasn't sent his decission yet, so she waits.")
+        print("But Bob hasn't sent his decision yet, so she waits.")
         return "wait"
     else:
-        print(f"\nBob is sending his decission on whether to proceed with the key or start the process of resending another key.")
+        print(f"\nBob is sending his decision on whether to proceed with the key or start the process of resending another key.")
         status = request.form["status"]
         return "done"
 

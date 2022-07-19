@@ -6,3 +6,4 @@ baseOpt = ['W', 'Z']
 
 singlets_sent = int(requests.get(quantuMedium).text)
 send_bases(baseOpt, singlets_sent, name)
+print("completed eavesdropping!")
