@@ -78,7 +78,7 @@ def send_bases():
     global bases
     name = request.form["name"]
     bases[name] = request.form["bases"]
-    print(f"\n{name.title()} sent his/her bases")
+    print(f"\n{name.title()} sent choice of bases")
     if bases["bob"] and bases["alice"]:
         print("\nAs the Quantum Medium has both the bases of Alice and Bob, it can start making measurements...")
         calc()
@@ -88,7 +88,7 @@ def send_bases():
 @app.route("/measure_qubits", methods=["POST"])
 def measure_qubits():
     name = request.form["name"]
-    print(f"\n{name.title()} is requesting for his/her measurements.", end = " ")
+    print(f"\n{name.title()} is requesting for the measurements.", end = " ")
     if results:
         print("Measurements are now ready, so Quantum Medium is  returning the results.")
         return results[name]
