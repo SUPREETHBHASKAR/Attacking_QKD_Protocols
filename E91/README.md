@@ -52,29 +52,35 @@ Alice sent choice of bases
 someone asked for the number of singlets... returned 2000
 127.0.0.1 - - [19/Jul/2022 10:30:10] "GET / HTTP/1.1" 200 -
 
-Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium requests him/her to wait a bit before asking again!
+Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium requests
+ him/her to wait a bit before asking again!
 127.0.0.1 - - [19/Jul/2022 10:30:12] "POST /measure_qubits HTTP/1.1" 200 -
 
 Bob sent choice of bases
 
 As the Quantum Medium has both the bases of Alice and Bob, it can start making measurements...
 
-Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium requests him/her to wait a bit before asking again!
+Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium requests
+ him/her to wait a bit before asking again!
 127.0.0.1 - - [19/Jul/2022 10:30:24] "POST /measure_qubits HTTP/1.1" 200 -
 
-Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium requests him/her to wait a bit before asking again!
+Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium requests
+ him/her to wait a bit before asking again!
 127.0.0.1 - - [19/Jul/2022 10:30:36] "POST /measure_qubits HTTP/1.1" 200 -
 
-Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium requests him/her to wait a bit before asking again!
+Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium requests
+ him/her to wait a bit before asking again!
 127.0.0.1 - - [19/Jul/2022 10:31:03] "POST /measure_qubits HTTP/1.1" 200 -
 
 measurements completed!
 127.0.0.1 - - [19/Jul/2022 10:31:03] "POST /send_bases HTTP/1.1" 200 -
 
-Bob is requesting for the measurements. Measurements are now ready, so Quantum Medium is  returning the results.
+Bob is requesting for the measurements. Measurements are now ready, so Quantum Medium is  returning the 
+results.
 127.0.0.1 - - [19/Jul/2022 10:31:05] "POST /measure_qubits HTTP/1.1" 200 -
 
-Alice is requesting for the measurements. Measurements are now ready, so Quantum Medium is  returning the results.
+Alice is requesting for the measurements. Measurements are now ready, so Quantum Medium is  returning the 
+results.
 127.0.0.1 - - [19/Jul/2022 10:31:15] "POST /measure_qubits HTTP/1.1" 200 -
 ```
 
@@ -104,19 +110,24 @@ Bob sent his bases and is requesting for Alice's bases. But Alice hasn't sent he
 Bob sent his bases and is requesting for Alice's bases. But Alice hasn't sent her bases yet, so he waits.
 127.0.0.1 - - [19/Jul/2022 10:31:16] "POST /get_alice_bases HTTP/1.1" 200 -
 
-Alice sent her bases and is requesting for Bob's bases. The Classical Medium already has Bob's bases, so it gives it to her.
+Alice sent her bases and is requesting for Bob's bases. The Classical Medium already has Bob's bases, so 
+it gives it to her.
 127.0.0.1 - - [19/Jul/2022 10:31:17] "POST /get_bob_bases HTTP/1.1" 200 -
 
-Alice sent her unused Bits and is requesting for Bob's unused Bits. But Bob hasn't sent his unused Bits yet, so she waits.
+Alice sent her unused Bits and is requesting for Bob's unused Bits. But Bob hasn't sent his unused Bits yet, 
+so she waits.
 127.0.0.1 - - [19/Jul/2022 10:31:19] "POST /get_bob_uBits HTTP/1.1" 200 -
 
-Bob sent his bases and is requesting for Alice's bases. The Classical Medium already has Alice's bases, so it gives it to him.
+Bob sent his bases and is requesting for Alice's bases. The Classical Medium already has Alice's bases, so 
+it gives it to him.
 127.0.0.1 - - [19/Jul/2022 10:31:19] "POST /get_alice_bases HTTP/1.1" 200 -
 
-Bob sent his unused Bits and is requesting for Alice's unused Bits. The Classical Medium already has Alice's unused Bits, so it gives it to him.
+Bob sent his unused Bits and is requesting for Alice's unused Bits. The Classical Medium already has Alice's 
+unused Bits, so it gives it to him.
 127.0.0.1 - - [19/Jul/2022 10:31:21] "POST /get_alice_uBits HTTP/1.1" 200 -
 
-Alice sent her unused Bits and is requesting for Bob's unused Bits. The Classical Medium already has Bob's unused Bits, so it gives it to her.
+Alice sent her unused Bits and is requesting for Bob's unused Bits. The Classical Medium already has Bob's 
+unused Bits, so it gives it to her.
 127.0.0.1 - - [19/Jul/2022 10:31:22] "POST /get_bob_uBits HTTP/1.1" 200 -
 ```
 
@@ -131,7 +142,13 @@ Reading qubits...
 Reading qubits...
 Reading qubits...
 chsh score: -2.831877117951897
-0010000011010101111100001001101000100101000001100001000000000001010001011010001011101000011010000100100110001100100010100010011011101100101000100011010001001000101100100111110011100011111010010110101001011101110001011111101000111100010110010100110101011101111000010110011001000101010000001000111010010001110111000100100011000101010001101000110110101000001011000010011010110011011000100101001001100111110010111010110101101101101010101101
+00100000110101011111000010011010001001010000011000010000000000010100010
+11010001011101000011010000100100110001100100010100010011011101100101000
+10001101000100100010110010011111001110001111101001011010100101110111000
+10111111010001111000101100101001101010111011110000101100110010001010100
+00001000111010010001110111000100100011000101010001101000110110101000001
+01100001001101011001101100010010100100110011111001011101011010110110110
+1010101101
 ```
 
 **"bob.py":** 
@@ -142,7 +159,13 @@ Hi! This is Bob!
 Sending bases...
 Reading qubits...
 chsh score: -2.831877117951897
-0010000011010101111100001001101000100101000001100001000000000001010001011010001011101000011010000100100110001100100010100010011011101100101000100011010001001000101100100111110011100011111010010110101001011101110001011111101000111100010110010100110101011101111000010110011001000101010000001000111010010001110111000100100011000101010001101000110110101000001011000010011010110011011000100101001001100111110010111010110101101101101010101101
+00100000110101011111000010011010001001010000011000010000000000010100010
+11010001011101000011010000100100110001100100010100010011011101100101000
+10001101000100100010110010011111001110001111101001011010100101110111000
+10111111010001111000101100101001101010111011110000101100110010001010100
+00001000111010010001110111000100100011000101010001101000110110101000001
+01100001001101011001101100010010100100110011111001011101011010110110110
+1010101101
 ```
 
 ## When Eve intercepts:
@@ -179,25 +202,31 @@ Bob sent choice of bases
 
 As the Quantum Medium has both the bases of Alice and Bob, it can start making measurements...
 
-Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium requests him/her to wait a bit before asking again!
+Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium 
+requests him/her to wait a bit before asking again!
 127.0.0.1 - - [19/Jul/2022 10:35:38] "POST /measure_qubits HTTP/1.1" 200 -
 
-Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium requests him/her to wait a bit before asking again!
+Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium 
+requests him/her to wait a bit before asking again!
 127.0.0.1 - - [19/Jul/2022 10:35:50] "POST /measure_qubits HTTP/1.1" 200 -
 
-Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium requests him/her to wait a bit before asking again!
+Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium 
+requests him/her to wait a bit before asking again!
 127.0.0.1 - - [19/Jul/2022 10:36:02] "POST /measure_qubits HTTP/1.1" 200 -
 
-Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium requests him/her to wait a bit before asking again!
+Alice is requesting for the measurements. But measurements are not ready yet, so Quantum Medium 
+requests him/her to wait a bit before asking again!
 127.0.0.1 - - [19/Jul/2022 10:36:28] "POST /measure_qubits HTTP/1.1" 200 -
 
 measurements completed!
 127.0.0.1 - - [19/Jul/2022 10:36:28] "POST /send_bases HTTP/1.1" 200 -
 
-Bob is requesting for the measurements. Measurements are now ready, so Quantum Medium is  returning the results.
+Bob is requesting for the measurements. Measurements are now ready, so Quantum Medium is  returning 
+the results.
 127.0.0.1 - - [19/Jul/2022 10:36:30] "POST /measure_qubits HTTP/1.1" 200 -
 
-Alice is requesting for the measurements. Measurements are now ready, so Quantum Medium is  returning the results.
+Alice is requesting for the measurements. Measurements are now ready, so Quantum Medium is  returning 
+the results.
 127.0.0.1 - - [19/Jul/2022 10:36:40] "POST /measure_qubits HTTP/1.1" 200 -
 ```
 
@@ -227,19 +256,24 @@ Bob sent his bases and is requesting for Alice's bases. But Alice hasn't sent he
 Bob sent his bases and is requesting for Alice's bases. But Alice hasn't sent her bases yet, so he waits.
 127.0.0.1 - - [19/Jul/2022 10:36:42] "POST /get_alice_bases HTTP/1.1" 200 -
 
-Alice sent her bases and is requesting for Bob's bases. The Classical Medium already has Bob's bases, so it gives it to her.
+Alice sent her bases and is requesting for Bob's bases. The Classical Medium already has Bob's bases, so it 
+gives it to her.
 127.0.0.1 - - [19/Jul/2022 10:36:42] "POST /get_bob_bases HTTP/1.1" 200 -
 
-Alice sent her unused Bits and is requesting for Bob's unused Bits. But Bob hasn't sent his unused Bits yet, so she waits.
+Alice sent her unused Bits and is requesting for Bob's unused Bits. But Bob hasn't sent his unused Bits yet, 
+so she waits.
 127.0.0.1 - - [19/Jul/2022 10:36:44] "POST /get_bob_uBits HTTP/1.1" 200 -
 
-Bob sent his bases and is requesting for Alice's bases. The Classical Medium already has Alice's bases, so it gives it to him.
+Bob sent his bases and is requesting for Alice's bases. The Classical Medium already has Alice's bases, so 
+it gives it to him.
 127.0.0.1 - - [19/Jul/2022 10:36:45] "POST /get_alice_bases HTTP/1.1" 200 -
 
-Bob sent his unused Bits and is requesting for Alice's unused Bits. The Classical Medium already has Alice's unused Bits, so it gives it to him.
+Bob sent his unused Bits and is requesting for Alice's unused Bits. The Classical Medium already has Alice's 
+unused Bits, so it gives it to him.
 127.0.0.1 - - [19/Jul/2022 10:36:47] "POST /get_alice_uBits HTTP/1.1" 200 -
 
-Alice sent her unused Bits and is requesting for Bob's unused Bits. The Classical Medium already has Bob's unused Bits, so it gives it to her.
+Alice sent her unused Bits and is requesting for Bob's unused Bits. The Classical Medium already has Bob's 
+unused Bits, so it gives it to her.
 127.0.0.1 - - [19/Jul/2022 10:36:48] "POST /get_bob_uBits HTTP/1.1" 200 -
 ```
 
